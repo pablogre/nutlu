@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Docena Chipá Blend",
+        "description": "Nuestros chipas combinan lo mejor de dos mundos: la ligereza de la fécula de mandioca con el aporte nutricional de la harina integral, fusionados con una mezcla de quesos y semillas que hacen cada bocado irresistible.",
+        "price": "7.800",
+        "main_image": "./assets/chipa.jpeg",
+        "ingredientes": ["Fécula de mandioca", "Harina integral", "Queso sardo", "Queso tybo", "Leche", "Mix de semillas", "Sal"]
+    },
+    {
+        "name": "Dátil Bombón Maní",
+        "description": "Dátiles enteros y maní tostado bañados en chocolate 70%: el dulzor natural de la fruta se encuentra con el amargo del cacao y el crocante del maní. Tres ingredientes, cero vueltas, un bocado que rinde como postre.",
+        "price": "8.000",
+        "main_image": "./assets/datil-mani.jpeg",
+        "ingredientes": ["Dátiles", "Chocolate 70%", "Mani"]
+    },
+    {
+        "name": "Dátil Bombón Sal Marina",
+        "description": "Dátiles bañados en chocolate 70% y terminados con escamas de sal marina. La sal corta el dulzor de la fruta y realza el cacao: un contraste simple que engancha desde el primer bocado.",
+        "price": "8.000",
+        "main_image": "./assets/datil-sal-marina.jpeg",
+        "ingredientes": ["Dátiles", "Chocolate 70%", "Sal marina"]
+    }
+]
