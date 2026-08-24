@@ -14,6 +14,15 @@ const parsePrecio = (valor) => Number(String(valor).replace(/\./g, '').replace('
 /** 7800 -> '$ 7.800' */
 const formatARS = (n) => `$ ${nf.format(n)}`;
 
+/** unidades mínimas de un mismo producto para acceder al precio por mayor */
+const MIN_MAYOR = 3;
+
+/** ¿el producto cotiza por mayor con esta cantidad? */
+const aplicaMayor = (p, qty) => p.precioMayorNum > 0 && qty >= MIN_MAYOR;
+
+/** precio unitario vigente: por mayor si alcanza el mínimo, si no el minorista */
+const precioAplicado = (p, qty) => (aplicaMayor(p, qty) ? p.precioMayorNum : p.precioNum);
+
 /** 'Dátil Bombón Maní' -> 'datil-bombon-mani' */
 const slug = (texto) =>
     texto
@@ -28,6 +37,12 @@ let productos = [];
 const cantidades = Object.create(null);
 
 /* ---------------- Render ---------------- */
+/** '$ 6.800 · por mayor' si el producto tiene precio mayorista; vacío si no */
+const precioMayor = (p) =>
+    p.precioMayorNum > 0
+        ? `<span class="precio-mayor">${formatARS(p.precioMayorNum)} <small>por mayor · ${MIN_MAYOR}+ u.</small></span>`
+        : '';
+
 function renderProductos() {
     document.getElementById('grid-productos').innerHTML = productos
         .map(
@@ -37,6 +52,7 @@ function renderProductos() {
             <div class="card__body">
                 <h3 class="card__title">${p.name}</h3>
                 <p class="card__price">${formatARS(p.precioNum)}</p>
+                ${precioMayor(p)}
                 <button class="btn btn--primary card__btn" type="button" data-pedir="${p.id}">Pedir</button>
             </div>
         </article>`
@@ -87,6 +103,7 @@ function renderPedido() {
             <div class="linea__info">
                 <p class="linea__name">${p.name}</p>
                 <p class="linea__unit">${formatARS(p.precioNum)}</p>
+                ${precioMayor(p)}
             </div>
             <div class="stepper">
                 <button class="stepper__btn" type="button" data-action="dec" data-id="${p.id}"
@@ -108,12 +125,14 @@ function actualizarTotales() {
 
     productos.forEach((p) => {
         const qty = cantidades[p.id];
-        const subtotal = qty * p.precioNum;
+        const subtotal = qty * precioAplicado(p, qty);
         total += subtotal;
 
+        const linea = document.querySelector(`[data-linea="${p.id}"]`);
         document.querySelector(`[data-qty="${p.id}"]`).value = qty;
         document.querySelector(`[data-subtotal="${p.id}"]`).textContent = formatARS(subtotal);
-        document.querySelector(`[data-linea="${p.id}"]`).classList.toggle('linea--vacia', qty === 0);
+        linea.classList.toggle('linea--vacia', qty === 0);
+        linea.classList.toggle('linea--mayor', aplicaMayor(p, qty));
     });
 
     document.getElementById('total-pedido').textContent = formatARS(total);
@@ -130,9 +149,13 @@ function setCantidad(id, qty) {
 function armarMensaje({ nombre, telefono, ciudad, observaciones }) {
     const lineas = productos
         .filter((p) => cantidades[p.id] > 0)
-        .map((p) => `• ${cantidades[p.id]} x ${p.name} — ${formatARS(cantidades[p.id] * p.precioNum)}`);
+        .map((p) => {
+            const qty = cantidades[p.id];
+            const etiqueta = aplicaMayor(p, qty) ? ' (por mayor)' : '';
+            return `• ${qty} x ${p.name}${etiqueta} — ${formatARS(qty * precioAplicado(p, qty))}`;
+        });
 
-    const total = productos.reduce((acc, p) => acc + cantidades[p.id] * p.precioNum, 0);
+    const total = productos.reduce((acc, p) => acc + cantidades[p.id] * precioAplicado(p, cantidades[p.id]), 0);
 
     const partes = [
         '¡Hola NUTLU! Quiero hacer un pedido 🧡',
@@ -321,6 +344,7 @@ async function init() {
             ...p,
             id: slug(p.name),
             precioNum: parsePrecio(p.price),
+            precioMayorNum: parsePrecio(p.wholesale_price),
             ingredientes: Array.isArray(p.ingredientes) ? p.ingredientes : [],
         }));
         productos.forEach((p) => {

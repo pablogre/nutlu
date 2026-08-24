@@ -347,6 +347,47 @@ a {
     color: var(--marca);
 }
 
+/* precio mayorista: secundario y atenuado, en cards y en el pedido */
+.precio-mayor {
+    margin-top: -4px;
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--tinta-suave);
+}
+
+.precio-mayor small {
+    font-weight: 400;
+}
+
+/* aviso de precio por mayor en el bloque de pedido */
+.pedido__aviso {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    background: color-mix(in srgb, var(--marca-2) 14%, #fff);
+    border-left: 4px solid var(--marca-2);
+    border-radius: var(--radio-sm);
+    font-size: .95rem;
+    line-height: 1.4;
+}
+
+.pedido__aviso-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* línea con precio por mayor activo: el minorista queda tachado y resalta el mayorista */
+.linea--mayor .linea__unit {
+    text-decoration: line-through;
+    opacity: .55;
+}
+
+.linea--mayor .precio-mayor {
+    color: var(--marca);
+}
+
 .card__btn {
     margin-top: auto;
     align-self: flex-start;
