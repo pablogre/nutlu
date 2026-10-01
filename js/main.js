@@ -168,6 +168,7 @@ function armarMensaje({ nombre, telefono, ciudad, observaciones }) {
         ...lineas,
         '',
         `*Total:* ${formatARS(total)}`,
+        '_El envío no está incluido y queda a cargo del comprador._',
     ];
 
     if (observaciones) partes.push('', `*Observaciones:* ${observaciones}`);
