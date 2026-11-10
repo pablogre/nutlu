@@ -15,7 +15,7 @@ const parsePrecio = (valor) => Number(String(valor).replace(/\./g, '').replace('
 const formatARS = (n) => `$ ${nf.format(n)}`;
 
 /** unidades mínimas de un mismo producto para acceder al precio por mayor */
-const MIN_MAYOR = 3;
+const MIN_MAYOR = 5;
 
 /** ¿el producto cotiza por mayor con esta cantidad? */
 const aplicaMayor = (p, qty) => p.precioMayorNum > 0 && qty >= MIN_MAYOR;
