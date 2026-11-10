@@ -13,7 +13,7 @@
         "price": "12.000",
         "wholesale_price": "8.000",
         "main_image": "./assets/datil-mani.jpeg",
-        "ingredientes": ["Dátiles", "Chocolate sin azucar", "Mani"]
+        "ingredientes": ["Dátiles", "Chocolate al 70%", "Mani"]
     },
     {
         "name": "Dátil Bombón Sal Marina",
@@ -21,6 +21,6 @@
         "price": "12.000",
         "wholesale_price": "8.000",
         "main_image": "./assets/datil-sal-marina.jpeg",
-        "ingredientes": ["Dátiles", "Chocolate sin azucar", "Sal marina"]
+        "ingredientes": ["Dátiles", "Chocolate al 70%", "Sal marina"]
     }
 ]
