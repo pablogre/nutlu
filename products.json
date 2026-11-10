@@ -10,7 +10,7 @@
     {
         "name": "Dátil Bombón Maní",
         "description": "Dátiles enteros y maní tostado bañados en chocolate sin azucar: el dulzor natural de la fruta se encuentra con el amargo del cacao y el crocante del maní. Tres ingredientes, cero vueltas, un bocado que rinde como postre.",
-        "price": "11.000",
+        "price": "12.000",
         "wholesale_price": "8.000",
         "main_image": "./assets/datil-mani.jpeg",
         "ingredientes": ["Dátiles", "Chocolate sin azucar", "Mani"]
@@ -18,7 +18,7 @@
     {
         "name": "Dátil Bombón Sal Marina",
         "description": "Dátiles bañados en chocolate sin azucar y terminados con escamas de sal marina. La sal corta el dulzor de la fruta y realza el cacao: un contraste simple que engancha desde el primer bocado.",
-        "price": "11.000",
+        "price": "12.000",
         "wholesale_price": "8.000",
         "main_image": "./assets/datil-sal-marina.jpeg",
         "ingredientes": ["Dátiles", "Chocolate sin azucar", "Sal marina"]
